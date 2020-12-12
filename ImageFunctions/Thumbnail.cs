@@ -30,12 +30,13 @@ namespace ImageFunctions
     public static class Thumbnail
     {
         private static readonly string BLOB_STORAGE_CONNECTION_STRING = Environment.GetEnvironmentVariable("AzureWebJobsStorage");
+        private const string ThumbnailMark = "thumbnail_";
 
         private static string GetBlobNameFromUrl(string bloblUrl)
         {
             var uri = new Uri(bloblUrl);
             var blobClient = new BlobClient(uri);
-            return blobClient.Name;
+            return ThumbnailMark + blobClient.Name;
         }
 
         private static IImageEncoder GetEncoder(string extension)
